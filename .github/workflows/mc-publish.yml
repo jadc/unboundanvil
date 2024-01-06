@@ -1,0 +1,32 @@
+name: Publish
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      matrix:
+        java: [17]
+        os: [ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Validate Gradle
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Make Gradle Executable
+        run: chmod +x ./gradlew
+      - name: Build
+        run: ./gradlew build
+      - uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: ${{ secrets.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

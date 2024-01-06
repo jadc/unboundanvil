@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "unboundanvil",
+  "version": "${version}",
+  "name": "Unbound Anvil",
+  "description": "An opinionated reduction of anvil restrictions.",
+  "authors": ["jadc"],
+  "contact": {
+    "repo": "https://github.com/jad/unboundanvil"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/unboundanvil/icon.png",
+  "environment": "*",
+  "entrypoints": {
+  },
+  "mixins": [
+    "unboundanvil.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=${minecraft_version}"
+  }
+}
